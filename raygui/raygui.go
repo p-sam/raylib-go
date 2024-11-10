@@ -1313,7 +1313,7 @@ func TextInputBox(bounds rl.Rectangle, title, message, buttons string, text *str
 }
 
 // ListViewEx control with extended parameters
-func ListViewEx(bounds rl.Rectangle, text []string, focus, scrollIndex *int32, active int32) int32 {
+func ListViewEx(bounds rl.Rectangle, text []string, scrollIndex *int32, active int32, focus *int32) int32 {
 	var cbounds C.struct_Rectangle
 	cbounds.x = C.float(bounds.X)
 	cbounds.y = C.float(bounds.Y)
@@ -1343,7 +1343,7 @@ func ListViewEx(bounds rl.Rectangle, text []string, focus, scrollIndex *int32, a
 
 	cactive := C.int(active)
 
-	C.GuiListViewEx(cbounds, (**C.char)(ctext.Pointer), count, &cfocus, &cscrollIndex, &cactive)
+	C.GuiListViewEx(cbounds, (**C.char)(ctext.Pointer), count, &cscrollIndex, &cactive, &cfocus)
 	return int32(cactive)
 }
 
